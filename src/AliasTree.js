@@ -5,7 +5,6 @@ import {
 } from 'lodash/fp';
 
 import tree from './tree';
-import './AliasTree.css';
 
 function AliasTree({ aliasTrees, currentAlias, selectAlias, setRef, updateTree }) {
   return (

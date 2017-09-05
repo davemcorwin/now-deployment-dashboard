@@ -5,6 +5,7 @@
   "dependencies": {
     "d3": "^4.10.0",
     "lodash": "^4.17.4",
+    "mini.css": "^2.3.4",
     "now-client": "^1.1.1",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",

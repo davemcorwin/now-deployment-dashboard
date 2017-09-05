@@ -1,6 +1,7 @@
 import React from 'react';
-import { compose, withHandlers, withStateHandlers } from 'recompose';
 import Now from 'now-client';
+import { compose, withHandlers, withStateHandlers } from 'recompose';
+import { get, find, keys, map } from 'lodash/fp';
 import AliasTree from './AliasTree.js';
 import './App.css';
 
@@ -11,42 +12,127 @@ function App({
   aliases,
   checkedDeployments,
   deployments,
+  navigate,
+  page,
   setCredentialsAndFetchData,
   setTeam,
   setToken,
   team,
   token,
 }) {
+  console.log(deployments)
+  console.log(aliases)
   return (
     <div>
-      <h1>▲now Deploy Dashboard</h1>
-      <div className="header">
-        <input
-          className="header-input"
-          name="token"
-          onChange={setTeam}
-          placeholder="token"
-          type="text"
-          value={token}
-        />
-        <input
-          className="header-input"
-          name="team"
-          onChange={setToken}
-          placeholder="team"
-          type="text"
-          value={team}
-        />
-        <input
-          className="header-input-submit"
-          type="submit"
-          onClick={setCredentialsAndFetchData}
-          value="Set Credentials"
-        />
-      </div>
-      {aliases && <AliasTree data={aliases} />}
-    </div>
+      <header>
+        <a href="#" className="logo">▲now Deploy Dashboard</a>
+      </header>
 
+      {/* Header Form */}
+      <form className="header-form">
+        <div className="row">
+          <div className="col-sm-12 col-md-5">
+            <input
+              className="full-width"
+              name="token"
+              onChange={setTeam}
+              placeholder="token"
+              type="text"
+              value={token}
+            />
+          </div>
+          <div className="col-sm-12 col-md-5">
+            <input
+              className="full-width"
+              name="team"
+              onChange={setToken}
+              placeholder="team"
+              type="text"
+              value={team}
+            />
+          </div>
+          <div className="col-sm-12 col-md-2">
+            <input
+              className="primary"
+              type="submit"
+              onClick={setCredentialsAndFetchData}
+              value="Set Credentials"
+            />
+          </div>
+        </div>
+      </form>
+
+      {deployments && aliases &&
+
+        <div className="responsive-margin">
+          <header className="tab-links">
+            <a
+              href="#"
+              onClick={() => navigate('deployments')}
+              className={`button ${page === 'deployments' ? 'active' : ''}`}
+            >
+              Deployments
+            </a>
+            <a href="#" onClick={() => navigate('aliases')} className={`button ${page === 'aliases' ? 'active' : ''}`}>Aliases</a>
+          </header>
+          {/* Tab Content */}
+          <div className="tab-content">
+            <div className={page === 'aliases' ? '' : 'hidden'}>
+              <AliasTree data={aliases} />
+            </div>
+            <div className={page === 'deployments' ? '' : 'hidden'}>
+              <table className="deployment-table">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Url</th>
+                    <th>State</th>
+                    <th>Alias</th>
+                  </tr>
+                </thead>
+
+                {map(name =>
+                  <tbody key={name}>
+                    <tr>
+                      <td colSpan="4">
+                        <div className="input-group">
+                          <input type="checkbox" id={name} />
+                          <label htmlFor={name}></label>
+                        </div>
+                        {name}
+                      </td>
+                    </tr>
+                    {map(deployment => {
+                      const alias = get('alias', find(alias => alias.deploymentId === deployment.uid, aliases))
+
+                      return (
+                        <tr key={deployment.uid}>
+                          <td></td>
+                          <td>
+                            <div className="input-group">
+                              <input type="checkbox" id={deployment.uid} />
+                              <label htmlFor={deployment.uid}></label>
+                            </div>
+                            {deployment.url}
+                          </td>
+                          <td>{deployment.state}</td>
+                          <td>
+                            {alias}
+                          </td>
+                        </tr>
+                      )
+                    }
+                      , deployments[name]
+                    )}
+                  </tbody>
+                  , keys(deployments)
+                )}
+              </table>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
   );
 }
 
@@ -56,9 +142,13 @@ export default compose(
     checkedDeployments: [],
     deployments: null,
     now: null,
+    page: 'deployments',
     team: TEAM,
     token: TOKEN
   }, {
+      navigate: state => page => ({
+        ...state, page
+      }),
       setAliases: state => aliases => ({
         ...state, aliases
       }),

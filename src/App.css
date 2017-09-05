@@ -1,3 +1,42 @@
+.header-form {
+  background: transparent;
+  margin: 0;
+  padding: 18px 0px 12px 0px;
+
+}
+
+.header-form input[type="submit"] {
+  margin: 5px;
+}
+
+
+.tab-links {
+  padding: 0;
+  height: auto;
+  background: transparent;
+}
+
+.tab-links .button {
+  background: transparent;
+  margin: 0;
+}
+
+.tab-links .active,
+.tab-links .active:focus {
+  background: rgb(28, 37, 41);
+}
+
+.tab-content {
+  background: rgb(28, 37, 41);
+  margin-top: 0;
+  padding: 12px;
+}
+
+.deployment-table {
+  margin: 0;
+}
+
+/*
 .header {
   display: flex;
   flex-flow: row nowrap;
@@ -51,3 +90,4 @@
 code {
   color: #e73a37;
 }
+*/
