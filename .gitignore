@@ -8,6 +8,8 @@
 
 # production
 /build
+/chrome-extension
+now-deployment-dashboard.zip
 
 # misc
 .DS_Store
