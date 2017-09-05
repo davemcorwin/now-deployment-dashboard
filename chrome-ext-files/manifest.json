@@ -1,16 +1,16 @@
 {
-  "manifest_version": 1,
+  "manifest_version": 2,
   "name": "▲now Deployment Dashboard",
   "short_name": "NDD",
   "description": "Easily manage your ▲now deployments",
   "version": "0.1.0",
   "icons": {
-    "16": "public/favicon-96x96.png",
-    "48": "public/favicon-96x96.png",
-    "128": "public/favicon-96x96.png"
+    "16": "favicon.png",
+    "48": "favicon.png",
+    "128": "favicon.png"
   },
   "browser_action": {
-    "default_icon": "public/favicon-96x96.png"
+    "default_icon": "favicon.png"
   },
   "permissions": [
     "http://*/",

@@ -1,7 +1,7 @@
 import React from 'react';
-import Now from 'now-client';
 import { compose, withHandlers, withStateHandlers } from 'recompose';
 import { get, find, keys, map } from 'lodash/fp';
+import Now from './now';
 import AliasTree from './AliasTree.js';
 import './App.css';
 
