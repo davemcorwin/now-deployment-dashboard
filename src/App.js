@@ -25,7 +25,7 @@ function App({
   return (
     <div>
       <header>
-        <a href="#" className="logo">▲now Deploy Dashboard</a>
+        <a href="#" className="logo">▲now Deployment Dashboard</a>
       </header>
 
       {/* Header Form */}

@@ -1,0 +1,26 @@
+{
+  "manifest_version": 1,
+  "name": "▲now Deployment Dashboard",
+  "short_name": "NDD",
+  "description": "Easily manage your ▲now deployments",
+  "version": "0.1.0",
+  "icons": {
+    "16": "public/favicon-96x96.png",
+    "48": "public/favicon-96x96.png",
+    "128": "public/favicon-96x96.png"
+  },
+  "browser_action": {
+    "default_icon": "public/favicon-96x96.png"
+  },
+  "permissions": [
+    "http://*/",
+    "https://*/",
+    "tabs"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "background": {
+    "scripts": [
+      "js/background.js"
+    ]
+  }
+}

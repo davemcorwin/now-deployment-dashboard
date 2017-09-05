@@ -1,6 +1,9 @@
 {
   "name": "now-deployment-dashboard",
+  "description": "Easily manage your ▲now deployments",
   "version": "0.1.0",
+  "license": "MIT",
+  "author": "davemcorwin@gmail.com",
   "private": true,
   "dependencies": {
     "d3": "^4.10.0",
@@ -15,6 +18,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "build-ext": "npm run build && ./bin/chrome_ext.sh",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
